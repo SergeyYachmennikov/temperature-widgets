@@ -1,0 +1,27 @@
+:host {
+  background: #d9d9d9;
+}
+
+.chart-toolbar {
+  min-height: 6vh;
+  background: #bf4aa8;
+}
+
+.chart-toolbar .mat-menu-item {
+  background: #d9d9d9;
+}
+
+.chart-block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chart-item {
+  width: 50%;
+  background: #fff;
+  min-height: 47vh;
+}
+
+.menu {
+  background: #fff !important;
+}

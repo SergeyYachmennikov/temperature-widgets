@@ -1,6 +1,22 @@
-<highcharts-chart
-  [Highcharts] = "highcharts"
-  [options] = "chartOptions"
-  style = "width: 400px; height: 400px; display: block; background: blue"
->
-</highcharts-chart>
+<mat-card class="chart-item-body" *ngIf="forecast;else loading">
+  <div class="chart-actions">
+    <div>
+      <mat-button-toggle-group>
+        <mat-button-toggle
+          *ngFor="let type of types; let i = index"
+          (click)="setChartType(i)"
+        >{{ getTypeName(type) }}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="chart-wrapper">
+    <highcharts-chart
+      [Highcharts]="highCharts"
+      [options]="chartOptions">
+    </highcharts-chart>
+  </div>
+</mat-card>
+<ng-template #loading>
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</ng-template>
+
