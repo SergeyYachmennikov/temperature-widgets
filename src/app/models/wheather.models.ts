@@ -86,3 +86,8 @@ export interface ForecastI {
   hourly?: HourlyWeatherI[],
   daily?: DailyWeatherI[]
 }
+
+export interface SeriesItemI {
+  name: string,
+  data: number[]
+}

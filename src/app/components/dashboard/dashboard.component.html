@@ -1,2 +1,51 @@
-<p>dashboard works!</p>
-<app-dashboard-chart-item></app-dashboard-chart-item>
+<mat-toolbar class="chart-toolbar">
+  <button mat-button [matMenuTriggerFor]="days">Set period</button>
+  <mat-menu #days="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let daysCount of availablePeriods"
+      (click)="setPeriod(daysCount)"
+    >
+      <span>{{ setDaysCount(daysCount) }}</span>
+    </button>
+  </mat-menu>
+<!--  <button mat-button [matMenuTriggerFor]="charts">Set charts count</button>-->
+<!--  <mat-menu #charts="matMenu">-->
+<!--    <button mat-menu-item *ngFor="let chart of chartsCount">-->
+<!--      <span>{{ chart }}</span>-->
+<!--    </button>-->
+<!--  </mat-menu>-->
+  <button mat-button [matMenuTriggerFor]="citiesList">Set city</button>
+  <mat-menu #citiesList="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let city of cities; let i = index"
+      value="i"
+      (click)="setCity(i)"
+    >
+      <span>{{ city.cityName }}</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<div class="chart-block">
+  <app-dashboard-chart-item
+    class="chart-item"
+    [forecast]="forecast"
+    [showTemperature]="true"
+    [cityName]="currentCity"
+  ></app-dashboard-chart-item>
+  <app-dashboard-chart-item
+    class="chart-item"
+    [forecast]="forecast"
+    [showPressure]="true"
+    [cityName]="currentCity"
+  ></app-dashboard-chart-item>
+  <app-dashboard-chart-item
+    class="chart-item"
+    [forecast]="forecast"
+    [showHumidity]="true"
+    [cityName]="currentCity"
+  ></app-dashboard-chart-item>
+  <app-dashboard-chart-item class="chart-item"></app-dashboard-chart-item>
+</div>
+

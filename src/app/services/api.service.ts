@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private _http: HttpClient) { }
 
-  getForecast(city: CityI, exclude: string) {
-    const url = `${environment.baseUrl}lat=${city.latitude}&lon=${city.longitude}&exclude=${exclude}&appid=${environment.apiKey}`;
+  getForecast(city: CityI) {
+    const url = `${environment.baseUrl}lat=${city.latitude}&lon=${city.longitude}&exclude=minutely&appid=${environment.apiKey}`;
     return this._http.get<ForecastI>(url);
   }
 }

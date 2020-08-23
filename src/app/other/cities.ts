@@ -1,6 +1,6 @@
 import { CityI } from '../models/wheather.models';
 
-const cities: CityI[] = [
+export const cities: CityI[] = [
   {
     cityName: 'Moscow',
     latitude: 55.751244,
@@ -32,3 +32,10 @@ const cities: CityI[] = [
     longitude: 151.209900
   }
 ]
+
+export const tooltipOptions = {
+  backgroundColor: '#fff',
+  borderColor: 'black',
+  borderRadius: 10,
+  borderWidth: 3
+}
