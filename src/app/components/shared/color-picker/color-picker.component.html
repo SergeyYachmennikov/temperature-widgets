@@ -1,0 +1,11 @@
+<div class="opened">
+  <h4>select a color</h4>
+  <div class="colors">
+    <div
+      *ngFor="let paint of defaultColors"
+      class="circle"
+      [style]="{ background: paint }"
+      (click)="selectColor(paint)"
+    ></div>
+  </div>
+</div>

@@ -2,18 +2,29 @@
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #51d0de;
-  border-radius: 0;
   box-shadow: none;
+  background: transparent;
 }
 
 .chart-actions {
   display: flex;
   justify-content: center;
+  padding-top: 25px;
 }
 
 .chart-wrapper {
   display: flex;
   justify-content: center;
-  padding: 25px;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+.chart-color-input {
+  width: 100px;
+}
+
+.chart {
+  position: absolute;
+  top: 2%
 }

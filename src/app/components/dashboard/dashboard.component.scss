@@ -1,14 +1,12 @@
-:host {
-  background: #d9d9d9;
-}
-
 .chart-toolbar {
   min-height: 6vh;
-  background: #bf4aa8;
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.75);
 }
 
-.chart-toolbar .mat-menu-item {
-  background: #d9d9d9;
+.chart-toolbar button {
+  font-size: 20px;
 }
 
 .chart-block {
@@ -18,10 +16,16 @@
 
 .chart-item {
   width: 50%;
-  background: #fff;
   min-height: 47vh;
 }
 
-.menu {
-  background: #fff !important;
+.chart-select {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.chart-select-label {
+  margin-right: 5px;
+  margin-left: 20px;
 }

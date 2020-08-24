@@ -1,22 +1,27 @@
-<mat-card class="chart-item-body" *ngIf="forecast;else loading">
+<mat-card class="chart-item-body" *ngIf="forecast">
   <div class="chart-actions">
     <div>
+      <mat-button-toggle-group>
+        <mat-button-toggle (click)="toggleColorPicker()" [checked]="showColorPicker">
+          Select a color
+        </mat-button-toggle>
+      </mat-button-toggle-group>
       <mat-button-toggle-group>
         <mat-button-toggle
           *ngFor="let type of types; let i = index"
           (click)="setChartType(i)"
+          [checked]="type === currentType"
         >{{ getTypeName(type) }}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </div>
   <div class="chart-wrapper">
-    <highcharts-chart
+    <app-color-picker *ngIf="showColorPicker" (selectColorEmitter)="changeColor($event)"></app-color-picker>
+    <highcharts-chart class="chart"
       [Highcharts]="highCharts"
       [options]="chartOptions">
     </highcharts-chart>
   </div>
 </mat-card>
-<ng-template #loading>
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-</ng-template>
+
 

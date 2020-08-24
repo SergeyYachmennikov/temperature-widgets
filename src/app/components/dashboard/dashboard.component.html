@@ -9,12 +9,7 @@
       <span>{{ setDaysCount(daysCount) }}</span>
     </button>
   </mat-menu>
-<!--  <button mat-button [matMenuTriggerFor]="charts">Set charts count</button>-->
-<!--  <mat-menu #charts="matMenu">-->
-<!--    <button mat-menu-item *ngFor="let chart of chartsCount">-->
-<!--      <span>{{ chart }}</span>-->
-<!--    </button>-->
-<!--  </mat-menu>-->
+
   <button mat-button [matMenuTriggerFor]="citiesList">Set city</button>
   <mat-menu #citiesList="matMenu">
     <button
@@ -26,26 +21,51 @@
       <span>{{ city.cityName }}</span>
     </button>
   </mat-menu>
+
+  <div class="chart-select">
+    <div>
+      <label class="chart-select-label">Temperature</label>
+      <mat-checkbox [checked]="true" (change)="selectChart('temperature')"></mat-checkbox>
+      <label class="chart-select-label">Pressure</label>
+      <mat-checkbox [checked]="true" (change)="selectChart('pressure')"></mat-checkbox>
+      <label class="chart-select-label">Humidity</label>
+      <mat-checkbox (change)="selectChart('humidity')"></mat-checkbox>
+      <label class="chart-select-label">All</label>
+      <mat-checkbox (change)="selectChart('all')"></mat-checkbox>
+    </div>
+
+  </div>
 </mat-toolbar>
 <div class="chart-block">
   <app-dashboard-chart-item
     class="chart-item"
+    *ngIf="shownCharts.temperature"
     [forecast]="forecast"
     [showTemperature]="true"
     [cityName]="currentCity"
   ></app-dashboard-chart-item>
   <app-dashboard-chart-item
     class="chart-item"
+    *ngIf="shownCharts.pressure"
     [forecast]="forecast"
     [showPressure]="true"
     [cityName]="currentCity"
   ></app-dashboard-chart-item>
   <app-dashboard-chart-item
     class="chart-item"
+    *ngIf="shownCharts.humidity"
     [forecast]="forecast"
     [showHumidity]="true"
     [cityName]="currentCity"
   ></app-dashboard-chart-item>
-  <app-dashboard-chart-item class="chart-item"></app-dashboard-chart-item>
+  <app-dashboard-chart-item
+    class="chart-item"
+    *ngIf="shownCharts.all"
+    [forecast]="forecast"
+    [showTemperature]="true"
+    [showPressure]="true"
+    [showHumidity]="true"
+    [cityName]="currentCity"
+  ></app-dashboard-chart-item>
 </div>
 

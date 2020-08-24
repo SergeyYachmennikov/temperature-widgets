@@ -87,7 +87,10 @@ export interface ForecastI {
   daily?: DailyWeatherI[]
 }
 
+export type graphData = [number, number];
+
 export interface SeriesItemI {
   name: string,
-  data: number[]
+  data: graphData[],
+  color?: string
 }

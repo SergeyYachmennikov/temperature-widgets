@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ApiService } from "../../services/api.service";
-import { cities } from '../../other/cities';
+import { cities } from '../../other/variables';
 import { CityI, ForecastI } from '../../models/wheather.models';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { findCityIndexByName, getArrayIndexes, getForecastByDays } from "../../helpers/dashboard.helper";
+import { findCityIndexByName, getArrayIndexes, getForecastByDays} from "../../helpers/dashboard.helper";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +15,15 @@ import { findCityIndexByName, getArrayIndexes, getForecastByDays } from "../../h
 export class DashboardComponent implements OnInit, OnDestroy {
 
   availablePeriods: number[];
-  // chartsCount = [1, 2, 3, 4];
   currentCity: string;
   cities: CityI[] = cities;
   forecast: ForecastI;
+  shownCharts = {
+    temperature: true,
+    pressure: true,
+    humidity: false,
+    all: false
+  }
 
   @ViewChild(MatMenuTrigger) days: MatMenuTrigger;
   @ViewChild(MatMenuTrigger) citiesList: MatMenuTrigger;
@@ -34,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return daysCount !== 1 ? daysCount + ' days' : daysCount + ' day';
   }
 
-  setCity(index: number, daysCount: number = 0) {
+  setCity(index: number, daysCount: number = 0): void {
     this.currentCity = this.cities[index].cityName;
     this.apiService.getForecast(this.cities[index])
       .pipe(takeUntil(this.unsubscribe$))
@@ -48,10 +53,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.setCity(findCityIndexByName(this.cities, this.currentCity), daysCount)
   }
 
+  selectChart(field: string): void {
+    this.shownCharts[field] = !this.shownCharts[field]
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete()
   }
-
 
 }

@@ -5,7 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const material = [
   MatCardModule,
@@ -13,7 +13,7 @@ const material = [
   MatMenuModule,
   MatButtonModule,
   MatButtonToggleModule,
-  MatProgressSpinnerModule
+  MatCheckboxModule
 ];
 
 @NgModule({
