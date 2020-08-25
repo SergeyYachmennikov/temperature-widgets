@@ -50,6 +50,7 @@
       [currentColor]="currentColor"
     ></app-color-picker>
     <highcharts-chart class="chart"
+      [callbackFunction]="chartCallback"
       [Highcharts]="highCharts"
       [options]="chartOptions">
     </highcharts-chart>

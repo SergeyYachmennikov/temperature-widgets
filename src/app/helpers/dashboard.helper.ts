@@ -22,7 +22,7 @@ export function getChartData(forecast: ForecastI, isTemperature, isPressure, isH
   if (!color) color = '#4b4fce';
   if (isTemperature) data.push({ color, name: 'Temperature', data: getTemperature(forecast) });
   if (isPressure) data.push({ color, name: 'Pressure', data: getForecastProperty(forecast, 'pressure') });
-  if (isHumidity) data.push({ color, name: 'Humidity',data: getForecastProperty(forecast, 'humidity') });
+  if (isHumidity) data.push({ color, name: 'Humidity', data: getForecastProperty(forecast, 'humidity') });
   return [ ...data ];
 }
 
@@ -41,4 +41,14 @@ export function getDateByTimestamp(timestamp: number): string {
 
 export function getTypeFromArray(type: string, array: string[]): string {
   return array.find(item => item === type);
+}
+
+export function createNewSeriesItem(sensor: string, color: string, forecast: ForecastI): SeriesItemI {
+  if (sensor === 'showTemperature') {
+    return { color, name: 'Temperature', data: getTemperature(forecast) }
+  } else  if (sensor === 'showPressure') {
+    return { color, name: 'Pressure', data: getForecastProperty(forecast, 'pressure') }
+  } else {
+    return { color, name: 'Humidity', data: getForecastProperty(forecast, 'humidity') }
+  }
 }

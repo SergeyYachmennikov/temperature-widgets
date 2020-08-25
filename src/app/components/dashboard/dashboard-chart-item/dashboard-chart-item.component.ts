@@ -1,7 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { ForecastI, SeriesItemI } from "../../../models/wheather.models";
-import { getChartData, getDateByTimestamp, getTypeFromArray, toCapitalizeCase } from "../../../helpers/dashboard.helper";
+import {
+  createNewSeriesItem,
+  getChartData,
+  getDateByTimestamp, getForecastProperty,
+  getTemperature,
+  getTypeFromArray,
+  toCapitalizeCase
+} from "../../../helpers/dashboard.helper";
 import { chartTypes, defaultColors } from "../../../other/variables";
 
 @Component({
@@ -24,7 +31,13 @@ export class DashboardChartItemComponent implements OnChanges {
   types: string[] = chartTypes;
   currentType: string = chartTypes[0];
   highCharts = Highcharts;
-  chartOptions: {};
+  chartOptions: any;
+  chartCallback;
+  chart;
+
+  constructor() {
+    this.chartCallback = chart => this.chart = chart;
+  }
 
   setChartOptions() {
     if (!this.forecast) return;
@@ -37,9 +50,7 @@ export class DashboardChartItemComponent implements OnChanges {
         borderColor: '#606060',
         borderWidth: 2,
         events: {
-          addSeries: function () {
-            console.log(this, 666)
-          }
+          addSeries: function () {}
         }
       },
       title: {
@@ -90,9 +101,12 @@ export class DashboardChartItemComponent implements OnChanges {
   }
 
   addSensorToChart(sensor: string): void {
+    this.chart.showLoading();
     this.toggleButtonHandler('showSensorSelector');
     this[sensor] = !this[sensor];
-    console.log(this.chartOptions);
+    if (this[sensor] === false) return;
+    this.chartOptions = { ...this.setChartOptions() };
+    this.chart.addSeries(createNewSeriesItem(this.currentColor, sensor, this.forecast))
   }
 
 }
