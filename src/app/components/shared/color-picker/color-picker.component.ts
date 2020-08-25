@@ -8,8 +8,7 @@ import { defaultColors } from "../../../other/variables";
 })
 export class ColorPickerComponent {
 
-  @Input() heading: string;
-  @Input() color: string;
+  @Input() currentColor: string;
   @Output() selectColorEmitter = new EventEmitter<string>();
 
   public defaultColors: string[] = defaultColors;

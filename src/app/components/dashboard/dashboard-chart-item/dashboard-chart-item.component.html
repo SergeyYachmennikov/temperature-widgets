@@ -2,21 +2,53 @@
   <div class="chart-actions">
     <div>
       <mat-button-toggle-group>
-        <mat-button-toggle (click)="toggleColorPicker()" [checked]="showColorPicker">
+        <mat-button-toggle
+          class="chart-actions-button"
+          (click)="toggleButtonHandler('showColorPicker')"
+          [checked]="showColorPicker"
+          stopPropagation
+        >
           Select a color
         </mat-button-toggle>
+        <mat-button-toggle
+          class="chart-actions-button"
+          [matMenuTriggerFor]="sensors"
+          (click)="toggleButtonHandler('showSensorSelector')"
+          [checked]="showSensorSelector"
+          stopPropagation
+        >add a sensor
+        </mat-button-toggle>
+        <mat-menu
+          #sensors="matMenu">
+          <button mat-menu-item (click)="addSensorToChart('showTemperature')">
+            Temperature
+            <mat-icon *ngIf="showTemperature">done</mat-icon>
+          </button>
+          <button mat-menu-item (click)="addSensorToChart('showPressure')">
+            Pressure
+            <mat-icon *ngIf="showPressure">done</mat-icon>
+          </button>
+          <button mat-menu-item (click)="addSensorToChart('showHumidity')">
+            Humidity
+            <mat-icon *ngIf="showHumidity">done</mat-icon>
+          </button>
+        </mat-menu>
       </mat-button-toggle-group>
       <mat-button-toggle-group>
         <mat-button-toggle
           *ngFor="let type of types; let i = index"
-          (click)="setChartType(i)"
+          (click)="setChartType(type)"
           [checked]="type === currentType"
         >{{ getTypeName(type) }}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </div>
   <div class="chart-wrapper">
-    <app-color-picker *ngIf="showColorPicker" (selectColorEmitter)="changeColor($event)"></app-color-picker>
+    <app-color-picker
+      *ngIf="showColorPicker"
+      (selectColorEmitter)="changeColor($event)"
+      [currentColor]="currentColor"
+    ></app-color-picker>
     <highcharts-chart class="chart"
       [Highcharts]="highCharts"
       [options]="chartOptions">

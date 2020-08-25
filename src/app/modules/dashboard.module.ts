@@ -5,12 +5,14 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { DashboardChartItemComponent } from "../components/dashboard/dashboard-chart-item/dashboard-chart-item.component";
 import { MaterialModule } from "./material.module";
 import { ColorPickerComponent } from "../components/shared/color-picker/color-picker.component";
+import { StopPropagationDirective } from "../directives/stop-propagation.directive";
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardChartItemComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    StopPropagationDirective
   ],
   imports: [
     CommonModule,

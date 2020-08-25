@@ -42,19 +42,25 @@
     *ngIf="shownCharts.temperature"
     [forecast]="forecast"
     [showTemperature]="true"
+    [showPressure]="false"
+    [showHumidity]="false"
     [cityName]="currentCity"
   ></app-dashboard-chart-item>
   <app-dashboard-chart-item
     class="chart-item"
     *ngIf="shownCharts.pressure"
     [forecast]="forecast"
+    [showTemperature]="false"
     [showPressure]="true"
+    [showHumidity]="false"
     [cityName]="currentCity"
   ></app-dashboard-chart-item>
   <app-dashboard-chart-item
     class="chart-item"
     *ngIf="shownCharts.humidity"
     [forecast]="forecast"
+    [showTemperature]="false"
+    [showPressure]="false"
     [showHumidity]="true"
     [cityName]="currentCity"
   ></app-dashboard-chart-item>

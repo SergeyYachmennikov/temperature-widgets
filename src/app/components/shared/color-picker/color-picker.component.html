@@ -2,10 +2,10 @@
   <h4>select a color</h4>
   <div class="colors">
     <div
-      *ngFor="let paint of defaultColors"
+      *ngFor="let color of defaultColors"
       class="circle"
-      [style]="{ background: paint }"
-      (click)="selectColor(paint)"
+      [style]="{ background: color, borderColor: color === currentColor ? '#181818' : '#606060' }"
+      (click)="selectColor(color)"
     ></div>
   </div>
 </div>

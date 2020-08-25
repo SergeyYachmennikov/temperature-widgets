@@ -23,7 +23,7 @@ export function getChartData(forecast: ForecastI, isTemperature, isPressure, isH
   if (isTemperature) data.push({ color, name: 'Temperature', data: getTemperature(forecast) });
   if (isPressure) data.push({ color, name: 'Pressure', data: getForecastProperty(forecast, 'pressure') });
   if (isHumidity) data.push({ color, name: 'Humidity',data: getForecastProperty(forecast, 'humidity') });
-  return data;
+  return [ ...data ];
 }
 
 export function findCityIndexByName(cities: CityI[], currentCityName: string): number {
@@ -37,4 +37,8 @@ export function getForecastByDays(forecast: ForecastI, daysCount: number): Forec
 export function getDateByTimestamp(timestamp: number): string {
   const fullDate = new Date(timestamp * 1000);
   return fullDate.getDate() + ' ' + months[fullDate.getMonth()]
+}
+
+export function getTypeFromArray(type: string, array: string[]): string {
+  return array.find(item => item === type);
 }

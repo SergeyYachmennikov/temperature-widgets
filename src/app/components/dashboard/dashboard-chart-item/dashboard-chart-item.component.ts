@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { ForecastI } from "../../../models/wheather.models";
-import { getChartData, getDateByTimestamp, toCapitalizeCase } from "../../../helpers/dashboard.helper";
-import { chartTypes } from "../../../other/variables";
+import { ForecastI, SeriesItemI } from "../../../models/wheather.models";
+import { getChartData, getDateByTimestamp, getTypeFromArray, toCapitalizeCase } from "../../../helpers/dashboard.helper";
+import { chartTypes, defaultColors } from "../../../other/variables";
 
 @Component({
   selector: 'app-dashboard-chart-item',
@@ -17,11 +17,12 @@ export class DashboardChartItemComponent implements OnChanges {
   @Input() showPressure = false;
   @Input() showHumidity = false;
   @Input() cityName = '';
-  showColorPicker = false;
-  currentColor: string = '';
 
-  currentType: string;
+  showColorPicker = false;
+  showSensorSelector = false;
+  currentColor: string = defaultColors[10];
   types: string[] = chartTypes;
+  currentType: string = chartTypes[0];
   highCharts = Highcharts;
   chartOptions: {};
 
@@ -34,7 +35,12 @@ export class DashboardChartItemComponent implements OnChanges {
         height: 350,
         borderRadius: 5,
         borderColor: '#606060',
-        borderWidth: 2
+        borderWidth: 2,
+        events: {
+          addSeries: function () {
+            console.log(this, 666)
+          }
+        }
       },
       title: {
         text: this.cityName
@@ -60,9 +66,9 @@ export class DashboardChartItemComponent implements OnChanges {
     }
   }
 
-  setChartType(index: number): void {
-    this.currentType = this.types[index];
-    this.chartOptions = this.setChartOptions();
+  setChartType(type: string): void {
+    this.currentType = getTypeFromArray(type, this.types)
+    this.chartOptions = { ...this.setChartOptions() };
   }
 
   getTypeName(type: string): string {
@@ -70,17 +76,23 @@ export class DashboardChartItemComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.forecast) this.setChartType(0);
+    if (changes.forecast) this.setChartType(this.currentType);
   }
 
-  toggleColorPicker(): void {
-    this.showColorPicker = !this.showColorPicker;
+  toggleButtonHandler(button: string): void {
+    this[button] = !this[button];
   }
 
   changeColor(color: string): void {
-    this.toggleColorPicker();
+    this.toggleButtonHandler('showColorPicker');
     this.currentColor = color;
-    this.chartOptions = this.setChartOptions();
+    this.chartOptions = { ...this.setChartOptions() };
+  }
+
+  addSensorToChart(sensor: string): void {
+    this.toggleButtonHandler('showSensorSelector');
+    this[sensor] = !this[sensor];
+    console.log(this.chartOptions);
   }
 
 }
