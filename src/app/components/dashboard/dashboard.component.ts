@@ -35,10 +35,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.setCity(0);
   }
 
-  setDaysCount(daysCount: number): string {
-    return daysCount !== 1 ? daysCount + ' days' : daysCount + ' day';
-  }
-
   setCity(index: number, daysCount: number = 0): void {
     this.currentCity = this.cities[index].cityName;
     this.apiService.getForecast(this.cities[index])

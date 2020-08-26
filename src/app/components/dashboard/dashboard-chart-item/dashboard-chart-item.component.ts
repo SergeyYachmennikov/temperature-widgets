@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { ForecastI, SeriesItemI } from "../../../models/wheather.models";
+import { ForecastI } from "../../../models/wheather.models";
 import {
   createNewSeriesItem,
   getChartData,
-  getDateByTimestamp, getForecastProperty,
-  getTemperature,
+  getDateByTimestamp,
   getTypeFromArray,
-  toCapitalizeCase
 } from "../../../helpers/dashboard.helper";
 import { chartTypes, defaultColors } from "../../../other/variables";
 
@@ -48,10 +46,7 @@ export class DashboardChartItemComponent implements OnChanges {
         height: 350,
         borderRadius: 5,
         borderColor: '#606060',
-        borderWidth: 2,
-        events: {
-          addSeries: function () {}
-        }
+        borderWidth: 2
       },
       title: {
         text: this.cityName
@@ -82,10 +77,6 @@ export class DashboardChartItemComponent implements OnChanges {
     this.chartOptions = { ...this.setChartOptions() };
   }
 
-  getTypeName(type: string): string {
-    return toCapitalizeCase(type);
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.forecast) this.setChartType(this.currentType);
   }
@@ -103,8 +94,8 @@ export class DashboardChartItemComponent implements OnChanges {
   addSensorToChart(sensor: string): void {
     this.chart.showLoading();
     this.toggleButtonHandler('showSensorSelector');
+    if (this[sensor] === true) return;
     this[sensor] = !this[sensor];
-    if (this[sensor] === false) return;
     this.chartOptions = { ...this.setChartOptions() };
     this.chart.addSeries(createNewSeriesItem(this.currentColor, sensor, this.forecast))
   }

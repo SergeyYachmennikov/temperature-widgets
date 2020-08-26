@@ -5,10 +5,6 @@ export function getArrayIndexes(forecast: ForecastI): number[] {
   return forecast.daily.map((_, index) => index + 1);
 }
 
-export function toCapitalizeCase(text: string): string {
-  return text[0].toUpperCase() + text.slice(1);
-}
-
 export function getTemperature(forecast: ForecastI): graphData[] {
   return forecast.daily.map(item => [item.dt, item.temp.day]);
 }

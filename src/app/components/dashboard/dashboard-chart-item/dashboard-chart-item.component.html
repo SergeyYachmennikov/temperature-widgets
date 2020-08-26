@@ -8,7 +8,7 @@
           [checked]="showColorPicker"
           stopPropagation
         >
-          Select a color
+          Select A Color
         </mat-button-toggle>
         <mat-button-toggle
           class="chart-actions-button"
@@ -16,7 +16,8 @@
           (click)="toggleButtonHandler('showSensorSelector')"
           [checked]="showSensorSelector"
           stopPropagation
-        >add a sensor
+        >
+          Add A Sensor
         </mat-button-toggle>
         <mat-menu
           #sensors="matMenu">
@@ -36,10 +37,10 @@
       </mat-button-toggle-group>
       <mat-button-toggle-group>
         <mat-button-toggle
-          *ngFor="let type of types; let i = index"
+          *ngFor="let type of types"
           (click)="setChartType(type)"
           [checked]="type === currentType"
-        >{{ getTypeName(type) }}</mat-button-toggle>
+        >{{ type | titlecase }}</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </div>

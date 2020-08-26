@@ -6,13 +6,15 @@ import { DashboardChartItemComponent } from "../components/dashboard/dashboard-c
 import { MaterialModule } from "./material.module";
 import { ColorPickerComponent } from "../components/shared/color-picker/color-picker.component";
 import { StopPropagationDirective } from "../directives/stop-propagation.directive";
+import { DaysPipe } from "../pipes/days.pipe";
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardChartItemComponent,
     ColorPickerComponent,
-    StopPropagationDirective
+    StopPropagationDirective,
+    DaysPipe
   ],
   imports: [
     CommonModule,

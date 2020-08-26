@@ -92,5 +92,5 @@ export type graphData = [number, number];
 export interface SeriesItemI {
   name: string,
   data: graphData[],
-  color?: string
+  color: string
 }
