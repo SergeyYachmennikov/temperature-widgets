@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { ApiService } from "../../services/api.service";
-import { cities } from '../../other/variables';
-import { CityI, ForecastI } from '../../models/wheather.models';
+import { ApiService } from "../../../services/api.service";
+import { cities } from '../../../other/variables';
+import { CityI, ForecastI } from '../../../models/wheather.models';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { findCityIndexByName, getArrayIndexes, getForecastByDays} from "../../helpers/dashboard.helper";
+import { findCityIndexByName, getArrayIndexes, getForecastByDays } from "../../../helpers/dashboard.helper";
 
 @Component({
   selector: 'app-dashboard',

@@ -1,4 +1,8 @@
-<mat-card class="chart-item-body" *ngIf="forecast">
+<mat-card
+  class="chart-item-body"
+  *ngIf="forecast"
+  (click)="toggleButtonHandler()"
+  >
   <div class="chart-actions">
     <div>
       <mat-button-toggle-group>
@@ -20,7 +24,7 @@
           Add A Sensor
         </mat-button-toggle>
         <mat-menu
-          #sensors="matMenu">
+          #sensors="matMenu" (click)="toggleButtonHandler()">
           <button mat-menu-item (click)="addSensorToChart('showTemperature')">
             Temperature
             <mat-icon *ngIf="showTemperature">done</mat-icon>
@@ -49,6 +53,7 @@
       *ngIf="showColorPicker"
       (selectColorEmitter)="changeColor($event)"
       [currentColor]="currentColor"
+      stopPropagation
     ></app-color-picker>
     <highcharts-chart class="chart"
       [callbackFunction]="chartCallback"

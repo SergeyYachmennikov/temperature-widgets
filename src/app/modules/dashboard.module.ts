@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from "../components/dashboard/dashboard.component";
+import { DashboardComponent } from "../components/dashboard/dashboard/dashboard.component";
 import { HighchartsChartModule } from 'highcharts-angular';
 import { DashboardChartItemComponent } from "../components/dashboard/dashboard-chart-item/dashboard-chart-item.component";
 import { MaterialModule } from "./material.module";

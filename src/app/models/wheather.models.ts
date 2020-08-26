@@ -87,10 +87,16 @@ export interface ForecastI {
   daily?: DailyWeatherI[]
 }
 
-export type graphData = [number, number];
+export type GraphData = [number, number];
 
 export interface SeriesItemI {
   name: string,
-  data: graphData[],
+  data: GraphData[],
   color: string
+}
+
+export enum SensorType {
+  Temperature = 'Temperature',
+  Pressure = 'Pressure',
+  Humidity = 'Humidity'
 }

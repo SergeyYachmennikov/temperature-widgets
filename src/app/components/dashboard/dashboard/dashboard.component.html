@@ -15,7 +15,6 @@
     <button
       mat-menu-item
       *ngFor="let city of cities; let i = index"
-      value="i"
       (click)="setCity(i)"
     >
       <span>{{ city.cityName }}</span>

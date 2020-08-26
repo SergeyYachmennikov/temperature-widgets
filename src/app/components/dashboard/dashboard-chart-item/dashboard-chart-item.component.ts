@@ -81,7 +81,11 @@ export class DashboardChartItemComponent implements OnChanges {
     if (changes.forecast) this.setChartType(this.currentType);
   }
 
-  toggleButtonHandler(button: string): void {
+  toggleButtonHandler(button?: string): void {
+    if (!button) {
+      this.showColorPicker = false;
+      this.showSensorSelector = false;
+    }
     this[button] = !this[button];
   }
 
@@ -93,7 +97,7 @@ export class DashboardChartItemComponent implements OnChanges {
 
   addSensorToChart(sensor: string): void {
     this.chart.showLoading();
-    this.toggleButtonHandler('showSensorSelector');
+    this.toggleButtonHandler();
     if (this[sensor] === true) return;
     this[sensor] = !this[sensor];
     this.chartOptions = { ...this.setChartOptions() };

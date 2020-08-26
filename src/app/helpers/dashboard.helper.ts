@@ -1,24 +1,24 @@
-import { CityI, ForecastI, graphData, SeriesItemI } from "../models/wheather.models";
+import { CityI, ForecastI, GraphData, SeriesItemI, SensorType } from "../models/wheather.models";
 import { months } from "../other/variables";
 
 export function getArrayIndexes(forecast: ForecastI): number[] {
   return forecast.daily.map((_, index) => index + 1);
 }
 
-export function getTemperature(forecast: ForecastI): graphData[] {
+export function getTemperature(forecast: ForecastI): GraphData[] {
   return forecast.daily.map(item => [item.dt, item.temp.day]);
 }
 
-export function getForecastProperty(forecast: ForecastI, property: string): graphData[] {
+export function getForecastProperty(forecast: ForecastI, property: string): GraphData[] {
   return forecast.daily.map(item => [item.dt, item[property]]);
 }
 
 export function getChartData(forecast: ForecastI, isTemperature, isPressure, isHumidity, color?): SeriesItemI[] {
   const data: SeriesItemI[] = [];
   if (!color) color = '#4b4fce';
-  if (isTemperature) data.push({ color, name: 'Temperature', data: getTemperature(forecast) });
-  if (isPressure) data.push({ color, name: 'Pressure', data: getForecastProperty(forecast, 'pressure') });
-  if (isHumidity) data.push({ color, name: 'Humidity', data: getForecastProperty(forecast, 'humidity') });
+  if (isTemperature) data.push({ color, name: SensorType.Temperature, data: getTemperature(forecast) });
+  if (isPressure) data.push({ color, name: SensorType.Pressure, data: getForecastProperty(forecast, 'pressure') });
+  if (isHumidity) data.push({ color, name: SensorType.Humidity, data: getForecastProperty(forecast, 'humidity') });
   return [ ...data ];
 }
 
@@ -41,10 +41,10 @@ export function getTypeFromArray(type: string, array: string[]): string {
 
 export function createNewSeriesItem(sensor: string, color: string, forecast: ForecastI): SeriesItemI {
   if (sensor === 'showTemperature') {
-    return { color, name: 'Temperature', data: getTemperature(forecast) }
+    return { color, name: SensorType.Temperature, data: getTemperature(forecast) }
   } else  if (sensor === 'showPressure') {
-    return { color, name: 'Pressure', data: getForecastProperty(forecast, 'pressure') }
+    return { color, name: SensorType.Pressure, data: getForecastProperty(forecast, 'pressure') }
   } else {
-    return { color, name: 'Humidity', data: getForecastProperty(forecast, 'humidity') }
+    return { color, name: SensorType.Humidity, data: getForecastProperty(forecast, 'humidity') }
   }
 }
